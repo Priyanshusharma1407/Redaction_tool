@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Text Redactor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Indian PII Text Redactor</h1>
+        <form method="POST" enctype="multipart/form-data">
+            <label for="raw_text">Enter Text:</label><br>
+            <textarea name="raw_text" rows="10" cols="60" placeholder="Paste your text here..."></textarea><br><br>
+        
+            <label for="file">Or Upload a Text File:</label>
+            <input type="file" name="file"><br><br>
+        
+            <button type="submit">Redact</button>
+        </form>
+
+
+        {% if redacted %}
+        <h2>Redacted Output</h2>
+        <pre>{{ redacted }}</pre>
+        {% endif %}
+    </div>
+</body>
+
+</html>
