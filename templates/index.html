@@ -1,29 +1,92 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Text Redactor</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="utf-8">
+    <title>PII Redaction Tool</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: white;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1,
+        h2,
+        h3 {
+            text-align: center;
+        }
+
+        textarea,
+        input[type="file"] {
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .redacted {
+            background-color: #f1f1f1;
+            padding: 1rem;
+            border: 1px solid #ccc;
+            white-space: pre-wrap;
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .summary-box {
+            background: #fff;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            margin-top: 1rem;
+        }
+    </style>
 </head>
 
 <body>
     <div class="container">
-        <h1>Indian PII Text Redactor</h1>
+        <h1>PII Redaction Tool</h1>
         <form method="POST" enctype="multipart/form-data">
-            <label for="raw_text">Enter Text:</label><br>
-            <textarea name="raw_text" rows="10" cols="60" placeholder="Paste your text here..."></textarea><br><br>
-        
-            <label for="file">Or Upload a Text File:</label>
-            <input type="file" name="file"><br><br>
-        
-            <button type="submit">Redact</button>
+            <label>Upload a .txt file:</label><br>
+            <input type="file" name="file"><br>
+            <label>Or paste your text below:</label><br>
+            <textarea name="raw_text" rows="10" placeholder="Enter your text here..."></textarea><br>
+            <input type="submit" value="Redact">
         </form>
 
-
         {% if redacted %}
-        <h2>Redacted Output</h2>
-        <pre>{{ redacted }}</pre>
+        <h2>🔒 Redacted Output</h2>
+        <div class="redacted">{{ redacted }}</div>
+        {% endif %}
+
+        {% if summary %}
+        <div class="summary-box">
+            <h3>📊 Redaction Summary</h3>
+            <ul>
+                {% for label, count in summary.items() %}
+                <li><strong>{{ label }}</strong>: {{ count }}</li>
+                {% endfor %}
+            </ul>
+        </div>
         {% endif %}
     </div>
 </body>

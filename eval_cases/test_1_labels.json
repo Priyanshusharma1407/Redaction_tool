@@ -1,0 +1,22 @@
+[
+    {
+        "text": "Rajesh Kumar",
+        "label": "PERSON"
+    },
+    {
+        "text": "88 MG Road",
+        "label": "ADDRESS"
+    },
+    {
+        "text": "Pune",
+        "label": "LOCATION"
+    },
+    {
+        "text": "rajesh.kumar@gmail.com",
+        "label": "EMAIL"
+    },
+    {
+        "text": "MH12AB1234",
+        "label": "VEHICLE"
+    }
+]
